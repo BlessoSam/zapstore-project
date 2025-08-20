@@ -1,0 +1,43 @@
+.promoBar {
+    background-color: black;
+    color: white;
+    padding: 8px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    @media (min-width: 960px) {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .promoText {
+        text-align: center;
+        font-size: 16px;
+        line-height: 1.4;
+    }
+
+    .promoLink {
+        color: white;
+        font-weight: 500;
+        text-decoration: underline;
+        margin-left: 4px;
+    }
+
+    .languageSelect {
+        min-width: 80px;
+        margin-left: 0;
+        align-self: center;
+
+        @media (min-width: 960px) {
+            margin-left: 32px;
+            align-self: flex-start;
+        }
+
+        .MuiSelect-icon {
+            color: white;
+        }
+    }
+
+}

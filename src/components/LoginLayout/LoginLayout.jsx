@@ -22,15 +22,14 @@ const LoginLayout = () => {
         handleSubmit,
         formState: { errors }
     } = useForm();
-
+    const navigate = useNavigate()
     const onSubmit = (data) => {
         console.log('Login Data:', data);
         toast.success('✅ Logged in successfully!');
-    };
-    const navigate = useNavigate()
-    const navHomePage = () => {
         navigate("/home")
-    }
+    };
+
+
 
     return (
         <>
@@ -99,7 +98,7 @@ const LoginLayout = () => {
                                                 backgroundColor: '#b71c1c'
                                             }
                                         }}
-                                        onClick={() => { navHomePage() }}
+
                                     >
                                         Log In
                                     </Button>

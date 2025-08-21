@@ -1,0 +1,123 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+}
+
+/* 🖼️ Image Section */
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background-color: #f5f5f5;
+
+  img {
+    width: 100%;
+    height: 100%;
+    // object-fit: cover;
+    display: block;
+  }
+}
+
+/* 🔴 Discount Badge */
+.discountBadge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background-color: #db4444;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 6px;
+  border-radius: 4px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* 🎯 Overlay Actions */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  opacity: 0;
+  background: rgba(0, 0, 0, 0.3);
+  transition: opacity 0.3s ease;
+
+  .iconGroup {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+
+    button {
+      background-color: rgba(0, 0, 0, 0.6);
+      border: none;
+      border-radius: 50%;
+      padding: 6px;
+      color: #fff;
+      cursor: pointer;
+    }
+  }
+
+  .cartButton {
+    align-self: center;
+    background-color: #db4444;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-weight: 600;
+    z-index: 3;
+  }
+}
+
+.imageWrapper:hover .overlay {
+  opacity: 1;
+}
+
+/* 📝 Text Section */
+.title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0.75rem 1rem 0.25rem;
+  color: #222;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 1rem;
+
+  .discount {
+    color: #db4444;
+    font-weight: 700;
+  }
+
+  .original {
+    text-decoration: line-through;
+    color: #888;
+    font-size: 0.875rem;
+  }
+}
+
+.rating {
+  margin: 0.5rem 1rem 1rem;
+  font-size: 0.875rem;
+  color: #555;
+}

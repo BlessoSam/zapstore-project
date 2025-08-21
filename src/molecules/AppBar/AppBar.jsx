@@ -17,15 +17,10 @@ import { Link as RouterLink } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import styles from './AppBar.module.scss';
+import { navLinks } from '../../constants/navLinks';
 
 export default function AppBarComp({
     logoText = 'ZapStore',
-    navLinks = [
-        { label: 'Home', path: '/home' },
-        { label: 'Contact', path: '/contact' },
-        { label: 'About', path: '/about' },
-        { label: 'Sign Up', path: '/signup' },
-    ],
     showSearch = true,
 }) {
     const [drawerOpen, setDrawerOpen] = useState(false);

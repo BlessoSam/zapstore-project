@@ -1,0 +1,15 @@
+.carouselWrapper {
+  width: 100%;
+  height: 100%;
+
+  :global(.carousel-item img) {
+    object-fit: cover;
+    height: 344px;
+  }
+
+  @media (max-width: 768px) {
+    :global(.carousel-item img) {
+      height: 240px;
+    }
+  }
+}

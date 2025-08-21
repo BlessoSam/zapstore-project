@@ -27,13 +27,14 @@ const AuthLayout = () => {
     const onSubmit = (data) => {
         console.log('Form Data:', data);
         toast.success('🎉 Account created successfully!');
+        navigate("/home")
     };
 
     const navigate = useNavigate()
 
-    const navHomePage = () => {
-        navigate("/home")
-    }
+    // const navHomePage = () => {
+    //     navigate("/home")
+    // }
 
     return (
         <>
@@ -117,7 +118,7 @@ const AuthLayout = () => {
                                         }
 
                                     }}
-                                    onClick={() => { navHomePage() }}
+                                   
                                 >
                                     Create Account
                                 </Button>

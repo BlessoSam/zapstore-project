@@ -3,34 +3,54 @@ import styles from './ProductCarousel.module.scss';
 import { useState } from 'react';
 import ProductCard from './ProductCard';
 
-const ProductCarousel = ({ products}) => {
+
+
+const ProductCarousel = ({ products }) => {
     const [viewAll, setViewAll] = useState(false);
+    const [wishlist, setWishlist] = useState([]);
 
     const visibleProducts = viewAll ? products : products.slice(0, 4);
 
     const onAddToCart = (product) => {
         console.log('Product added to cart:', product);
-        // You can replace this with your cart logic or Toastify feedback
+    };
+
+    const onAddToWishlist = (product) => {
+        if (!wishlist.find(item => item.id === product.id)) {
+            setWishlist([...wishlist, product]);
+        }
+    };
+
+    const onRemoveFromWishlist = (id) => {
+        setWishlist(wishlist.filter(item => item.id !== id));
     };
 
     return (
         <Box className={styles.wrapper}>
-
+            {/* Product Grid */}
             <Box className={styles.cardGrid}>
                 {visibleProducts.map((product, i) => (
                     <ProductCard
                         key={i}
                         product={product}
-                        onAddToCart={onAddToCart} // ✅ Pass the function here
+                        onAddToCart={onAddToCart}
+                        onAddToWishlist={onAddToWishlist}
                     />
                 ))}
             </Box>
 
+            {/* Toggle Button */}
             <Box className={styles.viewToggle}>
-                <Button variant="outlined" onClick={() => setViewAll(!viewAll)} sx={{bgcolor:"red",color:"white"}}>
+                <Button
+                    variant="outlined"
+                    onClick={() => setViewAll(!viewAll)}
+                    sx={{ bgcolor: "red", color: "white" }}
+                >
                     {viewAll ? 'View Less Products' : 'View All Products'}
                 </Button>
             </Box>
+
+
         </Box>
     );
 };

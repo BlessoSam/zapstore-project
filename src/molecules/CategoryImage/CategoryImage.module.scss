@@ -2,15 +2,16 @@
     display: grid;
     grid-template-columns: repeat(6, 1fr); // 6 in one line
     gap: 2rem;
-    padding: 1rem 32px 1rem 64px;
-   
-
-    @media (max-width: 768px) {
-        padding: 16px;
-    }
+    padding: 1rem 32px 1rem 32px; // reduce left-right padding
+    max-width: 1200px; // limit the width
+    margin: 0 auto; // center the grid
 
     @media (max-width: 1024px) {
         grid-template-columns: repeat(3, 1fr); // fallback for tablets
+    }
+
+    @media (max-width: 768px) {
+        padding: 16px;
     }
 
     @media (max-width: 600px) {

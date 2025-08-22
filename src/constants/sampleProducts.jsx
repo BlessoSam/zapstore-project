@@ -1,13 +1,16 @@
 export const sampleProducts = [
     {
+        id: 1,
         title: 'HAVIT HV-G92 Gamepad',
         image: 'src/assets/gamePad.png',
+        img:'/gamePad.png',
         discount: 120,
         original: 160,
         rating: 4,
         discountPercent: 40
     },
     {
+        id: 2,
         title: 'Logitech K380 Bluetooth Keyboard',
         image: 'src/assets/keyboard.png',
         discount: 1800,
@@ -16,6 +19,7 @@ export const sampleProducts = [
         discountPercent: 28
     },
     {
+        id: 3,
         title: 'Samsung 24" FHD Monitor',
         image: 'src/assets/monitor.png',
         discount: 8999,
@@ -24,6 +28,7 @@ export const sampleProducts = [
         discountPercent: 25
     },
     {
+        id: 4,
         title: 'GreenSoul Monster Gaming Chair',
         image: 'src/assets/chair.png',
         discount: 10999,
@@ -32,6 +37,7 @@ export const sampleProducts = [
         discountPercent: 27
     },
     {
+        id: 5,
         title: 'Men’s Winter Pullover Hoodie',
         image: 'src/assets/pullover.png',
         discount: 799,
@@ -40,6 +46,7 @@ export const sampleProducts = [
         discountPercent: 38
     },
     {
+        id: 6,
         title: 'Fossil Women’s Leather Handbag',
         image: 'src/assets/handbag.png',
         discount: 3499,
@@ -48,6 +55,7 @@ export const sampleProducts = [
         discountPercent: 30
     },
     {
+        id: 7,
         title: 'boAt Stone 650 Bluetooth Speaker',
         image: 'src/assets/speaker.png',
         discount: 1499,
@@ -56,6 +64,7 @@ export const sampleProducts = [
         discountPercent: 40
     },
     {
+        id: 8,
         title: 'BookSeat Ergonomic Reading Pillow',
         image: 'src/assets/bookSeat.png',
         discount: 999,

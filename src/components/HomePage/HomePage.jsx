@@ -8,7 +8,6 @@ import SectionHeading from "../../atoms/SectionHeading/SectionHeading"
 import ProductCarousel from "../../molecules/ProductCard/ProductCarousel"
 import { sampleProducts } from "../../constants/sampleProducts"
 import CategoryImage from "../../molecules/CategoryImage/CategoryImages"
-import { sampleProductsTwo } from "../../constants/sampleProductsTwo"
 import speakerImg from "../../assets/JBL.png"
 import ps5Img from '../../assets/ps5.png';
 import womenImg from '../../assets/women.png';
@@ -37,7 +36,7 @@ function HomePage() {
       <SectionHeading subtitle="Category" title="Browse By Category" />
       <CategoryImage />
       <SectionHeading subtitle="This Month" title="Best Selling Product" />
-      <ProductCarousel products={sampleProductsTwo} />
+      <ProductCarousel products={sampleProducts} />
       <Box className={styles.bannerWrapper}>
         <Grid container className={styles.bannerContainer} spacing={4} alignItems="center">
           {/* Left Content */}

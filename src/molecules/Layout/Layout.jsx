@@ -1,6 +1,6 @@
 import {
     Box, IconButton, Typography, Link as MuiLink,
-    InputBase, Drawer, List, ListItem, ListItemText
+    InputBase, Drawer, List, ListItem, ListItemText, Badge
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -10,25 +10,19 @@ import { useState } from 'react';
 import styles from './Layout.module.scss';
 import { navLinks } from '../../constants/navLinks';
 import { useNavigate } from 'react-router-dom';
-
-
+import { useCart } from '../../context/CartContext';
 
 const Layout = () => {
-    const navigate = useNavigate()
-    const myAcc = () => {
-        navigate("/myacc")
-    }
-    const myWishList = () => {
-        navigate("/wishlist")
-    }
-    const myCart = () => {
-        navigate("/cart")
-    }
+    const navigate = useNavigate();
+    const { cart, wishlist } = useCart();   // ✅ access cart & wishlist
     const [drawerOpen, setDrawerOpen] = useState(false);
+
+    const myAcc = () => navigate("/myacc");
+    const myWishList = () => navigate("/wishlist");
+    const myCart = () => navigate("/cart");
 
     return (
         <>
-            {/* Header */}
             <Box className={styles.header}>
                 <Typography variant="h5" className={styles.logo}>
                     ZapStore
@@ -49,24 +43,35 @@ const Layout = () => {
                     sx={{ display: { xs: 'none', md: 'block' } }}
                 />
 
-
                 <Box className={styles.iconGroup}>
+                    {/* Wishlist with red badge */}
                     <IconButton onClick={myWishList}>
-                        <FavoriteBorderIcon />
+                        <Badge badgeContent={wishlist.length} sx={{
+                            "& .MuiBadge-badge": { backgroundColor: "red", color: "white" }
+                        }}>
+                            <FavoriteBorderIcon />
+                        </Badge>
                     </IconButton>
+
+                    {/* Cart with red badge */}
                     <IconButton onClick={myCart}>
-                        <ShoppingCartIcon />
+                        <Badge badgeContent={cart.length} sx={{
+                            "& .MuiBadge-badge": { backgroundColor: "red", color: "white" }
+                        }}>
+                            <ShoppingCartIcon />
+                        </Badge>
                     </IconButton>
+
                     <IconButton onClick={myAcc}>
                         <AccountCircleIcon />
                     </IconButton>
+
                     <IconButton className={styles.menuIcon} onClick={() => setDrawerOpen(true)}>
                         <MenuIcon />
                     </IconButton>
                 </Box>
             </Box>
 
-            {/* Drawer for Mobile Nav */}
             <Drawer anchor="right" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
                 <List className={styles.drawerList}>
                     {navLinks.map(link => (

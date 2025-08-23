@@ -1,17 +1,21 @@
 // src/pages/CheckoutPage.jsx
-import { Box, Typography, TextField, Button, RadioGroup, FormControlLabel, Radio, Divider, Breadcrumbs, Link } from "@mui/material";
+import {
+    Box, Typography, TextField, Button,
+    RadioGroup, FormControlLabel, Radio, Divider,
+    Breadcrumbs, Link
+} from "@mui/material";
 import { useCart } from "../../context/CartContext";
 import PromoBarComp from "../../molecules/promobar/PromoBarComp";
 import Layout from "../../molecules/Layout/Layout";
 import Footer from "../../molecules/Footer/Footer";
 import styles from "./Checkout.module.scss";
-
-// Import Toastify
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
 
 const CheckoutPage = () => {
-    const { cart } = useCart();
+    const { cart, clearCart } = useCart();
+    const navigate = useNavigate();
 
     const subtotal = cart.reduce(
         (acc, item) => acc + item.discount * item.quantity,
@@ -19,20 +23,13 @@ const CheckoutPage = () => {
     );
 
     const handlePlaceOrder = () => {
-        // Show big toast
+        clearCart();  // ✅ empty cart
+
         toast.success("🎉 Order placed successfully!", {
             position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            style: {
-                fontSize: '1.2rem',
-                fontWeight: 'bold',
-                padding: '20px',
-            },
+            autoClose: 3000,
+            style: { fontSize: '1.2rem', fontWeight: 'bold', padding: '20px' },
+            onClose: () => navigate("/home"), // ✅ redirect after toast
         });
     };
 
@@ -44,11 +41,11 @@ const CheckoutPage = () => {
                 <Breadcrumbs aria-label="breadcrumb">
                     <Link underline="hover" color="inherit" href="/home">Home</Link>
                     <Link underline="hover" color="inherit" href="/cart">Cart</Link>
-                    <Typography color="error">Chekout</Typography>
+                    <Typography color="error">Checkout</Typography>
                 </Breadcrumbs>
             </Box>
-            <Box className={styles.checkoutContainer}>
 
+            <Box className={styles.checkoutContainer}>
                 {/* Billing Form */}
                 <Box className={styles.billingForm}>
                     <Typography variant="h5" gutterBottom>Billing Details</Typography>
@@ -85,27 +82,19 @@ const CheckoutPage = () => {
                         <FormControlLabel value="cod" control={<Radio />} label="Cash on Delivery" />
                     </RadioGroup>
 
-                    {/* Coupon */}
-                    <Box className={styles.couponBox}>
-                        <TextField size="small" placeholder="Coupon Code" fullWidth />
-                        <Button variant="contained" sx={{ mt: 1 }}>Apply Coupon</Button>
-                    </Box>
-
                     <Button
                         variant="contained"
                         color="error"
                         sx={{ mt: 2 }}
                         fullWidth
-                        onClick={handlePlaceOrder} // Trigger toast
+                        onClick={handlePlaceOrder}
                     >
                         Place Order
                     </Button>
                 </Box>
             </Box>
 
-            {/* Toast Container */}
             <ToastContainer />
-
             <Footer />
         </>
     );

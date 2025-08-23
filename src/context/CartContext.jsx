@@ -4,6 +4,7 @@ const CartContext = createContext();
 export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
+    // --- Cart ---
     const [cart, setCart] = useState(() => {
         const savedCart = localStorage.getItem("cart");
         return savedCart ? JSON.parse(savedCart) : [];
@@ -13,11 +14,9 @@ export const CartProvider = ({ children }) => {
         localStorage.setItem("cart", JSON.stringify(cart));
     }, [cart]);
 
-    // ✅ Add to Cart with quantity handling
     const addToCart = (product) => {
         setCart((prevCart) => {
             const existingItem = prevCart.find((item) => item.id === product.id);
-
             if (existingItem) {
                 return prevCart.map((item) =>
                     item.id === product.id
@@ -25,13 +24,10 @@ export const CartProvider = ({ children }) => {
                         : item
                 );
             }
-
-            // If new product, set quantity = 1
             return [...prevCart, { ...product, quantity: 1 }];
         });
     };
 
-    // ✅ Update quantity manually
     const updateQuantity = (id, newQty) => {
         setCart((prevCart) =>
             prevCart.map((item) =>
@@ -46,9 +42,42 @@ export const CartProvider = ({ children }) => {
 
     const clearCart = () => setCart([]);
 
+    // --- Wishlist ---
+    const [wishlist, setWishlist] = useState(() => {
+        const savedWishlist = localStorage.getItem("wishlist");
+        return savedWishlist ? JSON.parse(savedWishlist) : [];
+    });
+
+    useEffect(() => {
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    }, [wishlist]);
+
+    const addToWishlist = (product) => {
+        setWishlist((prev) => {
+            if (prev.find((item) => item.id === product.id)) return prev; // no duplicates
+            return [...prev, product];
+        });
+    };
+
+    const removeFromWishlist = (id) => {
+        setWishlist((prev) => prev.filter((item) => item.id !== id));
+    };
+
+    const clearWishlist = () => setWishlist([]);
+
     return (
         <CartContext.Provider
-            value={{ cart, addToCart, updateQuantity, removeFromCart, clearCart }}
+            value={{
+                cart,
+                wishlist,
+                addToCart,
+                updateQuantity,
+                removeFromCart,
+                clearCart,
+                addToWishlist,
+                removeFromWishlist,
+                clearWishlist,
+            }}
         >
             {children}
         </CartContext.Provider>
